@@ -1,0 +1,752 @@
+[
+    {
+        "id": "f3313a5ac556a805",
+        "type": "tab",
+        "label": "Regester",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5bfa475fd1e7d02b",
+        "type": "tab",
+        "label": "Login",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a2fc58594af88863",
+        "type": "tab",
+        "label": "Home",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "85f36df497b9880d",
+        "type": "tab",
+        "label": "AddDevice",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c9f623739d46275e",
+        "type": "tab",
+        "label": "AddProcess",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "641a6ccba11fbfd7",
+        "type": "ui_tab",
+        "name": "Login",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "86126820837760eb",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "641a6ccba11fbfd7",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "65b223978023b8f0",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "0203342d6fc07dad",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0203342d6fc07dad",
+        "type": "ui_tab",
+        "name": "Register",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ebbd1cf85ee67044",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "cf5d780e9690fd28",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "ebbd1cf85ee67044",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "12dc0117bf8444cd",
+        "type": "ui_group",
+        "name": "List Device",
+        "tab": "ebbd1cf85ee67044",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8eef4ec8d4e92f2f",
+        "type": "ui_tab",
+        "name": "AddDevice",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c54f7acc2280f3a5",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "8eef4ec8d4e92f2f",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a161bce6b6a73e98",
+        "type": "ui_tab",
+        "name": "AddProcess",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "8b36d0b198c719c9",
+        "type": "ui_group",
+        "name": "CountDown",
+        "tab": "a161bce6b6a73e98",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0e6d738f8bfec35f",
+        "type": "ui_group",
+        "name": "SetTime",
+        "tab": "a161bce6b6a73e98",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0f5ad18e9dcba713",
+        "type": "ui_group",
+        "name": "Device's schedule",
+        "tab": "ebbd1cf85ee67044",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c61d94800c52d929",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "6267b232d241dd80",
+        "type": "ui_form",
+        "z": "f3313a5ac556a805",
+        "name": "",
+        "label": "",
+        "group": "65b223978023b8f0",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "userName",
+                "value": "userName",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "password",
+                "value": "password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "confirm_Password",
+                "value": "confirm_Password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "userName": "",
+            "password": "",
+            "confirm_Password": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 350,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ef480e29841802c1",
+        "type": "ui_button",
+        "z": "f3313a5ac556a805",
+        "name": "",
+        "group": "65b223978023b8f0",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Login",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Login\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 330,
+        "y": 260,
+        "wires": [
+            [
+                "b0fbcf06ccc0de7c"
+            ]
+        ]
+    },
+    {
+        "id": "b0fbcf06ccc0de7c",
+        "type": "ui_ui_control",
+        "z": "f3313a5ac556a805",
+        "name": "",
+        "events": "all",
+        "x": 520,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4f4ce6ba438a9a0c",
+        "type": "ui_form",
+        "z": "5bfa475fd1e7d02b",
+        "name": "",
+        "label": "",
+        "group": "86126820837760eb",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "userName",
+                "value": "userName",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "password",
+                "value": "password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "userName": "",
+            "password": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 390,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ba51a5ef8936aa16",
+        "type": "ui_button",
+        "z": "5bfa475fd1e7d02b",
+        "name": "",
+        "group": "86126820837760eb",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Register",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Register\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 400,
+        "y": 280,
+        "wires": [
+            [
+                "74fa568b80725afe"
+            ]
+        ]
+    },
+    {
+        "id": "74fa568b80725afe",
+        "type": "ui_ui_control",
+        "z": "5bfa475fd1e7d02b",
+        "name": "",
+        "events": "all",
+        "x": 640,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cdbb44ba5b37245a",
+        "type": "ui_button",
+        "z": "a2fc58594af88863",
+        "name": "",
+        "group": "cf5d780e9690fd28",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Add Device",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"addDevice\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 390,
+        "y": 180,
+        "wires": [
+            [
+                "ab71ba7977f5a54e"
+            ]
+        ]
+    },
+    {
+        "id": "98c70b8415d2b623",
+        "type": "ui_button",
+        "z": "a2fc58594af88863",
+        "name": "",
+        "group": "cf5d780e9690fd28",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Add Process",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"AddProcess\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "45b66217d3cf7c19"
+            ]
+        ]
+    },
+    {
+        "id": "ab71ba7977f5a54e",
+        "type": "ui_ui_control",
+        "z": "a2fc58594af88863",
+        "name": "",
+        "events": "all",
+        "x": 560,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "45b66217d3cf7c19",
+        "type": "ui_ui_control",
+        "z": "a2fc58594af88863",
+        "name": "",
+        "events": "all",
+        "x": 560,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c1af01f154d633d1",
+        "type": "ui_template",
+        "z": "a2fc58594af88863",
+        "group": "12dc0117bf8444cd",
+        "name": "",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<div ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 560,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "23ee7b6eb78a1030",
+        "type": "ui_text_input",
+        "z": "a2fc58594af88863",
+        "name": "",
+        "label": "idDevice",
+        "tooltip": "",
+        "group": "0f5ad18e9dcba713",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 380,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dc55b76c9b0c2dd4",
+        "type": "ui_button",
+        "z": "a2fc58594af88863",
+        "name": "",
+        "group": "0f5ad18e9dcba713",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "button",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 370,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d7f7f86e7a37087d",
+        "type": "ui_form",
+        "z": "85f36df497b9880d",
+        "name": "",
+        "label": "",
+        "group": "c54f7acc2280f3a5",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "idDevice",
+                "value": "idDevice",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "key",
+                "value": "key",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "idDevice": "",
+            "key": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 350,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2284f24bad77dbf0",
+        "type": "ui_form",
+        "z": "c9f623739d46275e",
+        "name": "",
+        "label": "",
+        "group": "8b36d0b198c719c9",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "idDevice",
+                "value": "idDevice",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Time (second)",
+                "value": "Time",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "amount",
+                "value": "amount",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "volume (ml)",
+                "value": "volume",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "idDevice": "",
+            "Time": "",
+            "amount": "",
+            "volume": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 350,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "559dae6671c99df5",
+        "type": "ui_form",
+        "z": "c9f623739d46275e",
+        "name": "",
+        "label": "",
+        "group": "0e6d738f8bfec35f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "idDevice",
+                "value": "idDevice",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "time",
+                "value": "time",
+                "type": "time",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "date",
+                "value": "date",
+                "type": "date",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "volume (ml)",
+                "value": "volume",
+                "type": "number",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "idDevice": "",
+            "time": "",
+            "date": "",
+            "volume": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 510,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    }
+]
