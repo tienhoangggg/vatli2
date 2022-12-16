@@ -1,55 +1,68 @@
 #include <WiFi.h>
+#include <Servo.h>
 #include <PubSubClient.h>
 int trig_pin = 2;
 int echo_pin = 4;
-const char* ssid = "Wokwi-GUEST";
-const char* password = "";
-const char* idDevice = "30t41975"
+const char *ssid = "Wokwi-GUEST";
+const char *password = "";
+const char *idDevice = "30t41975" int pin_servo = 9;
 
 //***Set server***
-const char* mqttServer = "broker.mqtt-dashboard.com"; 
+const char *mqttServer = "broker.mqtt-dashboard.com";
 int port = 1883;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-void wifiConnect() {
+void wifiConnect()
+{
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
+  while (WiFi.status() != WL_CONNECTED)
+  {
     delay(500);
   }
 }
 
-void mqttReconnect() {
-  while(!client.connected()) {
-    if(client.connect(idDevice))) {
+void mqttReconnect()
+{
+  while (!client.connected())
+  {
+    if (client.connect(idDevice)))
+      {
 
-      //***Subscribe all topic you need***
-      client.subscribe("binhluuluong/");
-    }
-    else {
+        //***Subscribe all topic you need***
+        client.subscribe("binhluuluong/");
+      }
+    else
+    {
       delay(5000);
     }
   }
 }
 
-void setup() {
+void setup()
+{
   pinMode(trig_pin, OUTPUT);
   pinMode(echo_pin, INPUT);
   wifiConnect();
   client.setServer(mqttServer, port);
   client.setCallback(callback);
+
+  myservo.attach(pin_servo);
 }
 
-//MQTT Receiver
-void callback(char* topic, byte* message, unsigned int length) {
+// MQTT Receiver
+void callback(char *topic, byte *message, unsigned int length)
+{
   String strMsg;
-  for(int i=0; i<length; i++) {
+  for (int i = 0; i < length; i++)
+  {
     strMsg += (char)message[i];
   }
 }
 
-long getDistance(){
+long getDistance()
+{
   digitalWrite(trig_pin, LOW);
   delayMicroseconds(2);
   digitalWrite(trig_pin, HIGH);
@@ -60,8 +73,22 @@ long getDistance(){
   return distanceCm;
 }
 
-void loop() {
-  if(!client.connected()) {
+void turnServo(bool s)
+{
+  if (s == true)
+  {
+    myservo.write(180);
+  }
+  else if (s == false)
+  {
+    myservo.write(0);
+  }
+}
+
+void loop()
+{
+  if (!client.connected())
+  {
     mqttReconnect();
   }
   client.loop();
