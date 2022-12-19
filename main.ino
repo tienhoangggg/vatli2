@@ -3,9 +3,12 @@
 #include <PubSubClient.h>
 int trig_pin = 2;
 int echo_pin = 4;
+int addDevice_pin = 0;
+int reset_pin = 0;
+int pin_servo = 9;
 const char *ssid = "Wokwi-GUEST";
 const char *password = "";
-const char *idDevice = "30t41975" int pin_servo = 9;
+const char *idDevice = "30t41975";
 
 //***Set server***
 const char *mqttServer = "broker.mqtt-dashboard.com";
@@ -83,6 +86,25 @@ void turnServo(bool s)
   {
     myservo.write(0);
   }
+}
+
+long volume(){
+  long h = 60 - getDistance();
+  long v = 0;
+  if (h > 20) {
+    v += (h-20)*1256;
+    h = 20;
+  }
+  v += 25120 * h * h * h / 24000;
+  return v;
+}
+
+void throwOut(long v){
+  long v_after = volume() - v;
+  if (v_after < 0) v_after = 0;
+  turnServo(true);
+  while(volume() > v_after);
+  turnServo(false);
 }
 
 void loop()
