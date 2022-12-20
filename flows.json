@@ -40,6 +40,14 @@
         "env": []
     },
     {
+        "id": "ebc9f3663d80658c",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "641a6ccba11fbfd7",
         "type": "ui_tab",
         "name": "Login",
@@ -368,7 +376,7 @@
         "type": "function",
         "z": "f3313a5ac556a805",
         "name": "function 2",
-        "func": "if (msg.payload.password == msg.payload.confirm_Password)\n{\n    flow.set(\"userName\",msg.payload.userName)\n    flow.set(\"password\", msg.payload.password)\n    msg.childpath = msg.payload.userName\n    return msg;\n}",
+        "func": "if (msg.payload.password == msg.payload.confirm_Password)\n{\n    flow.set(\"userName\",msg.payload.userName)\n    flow.set(\"password\", msg.payload.password)\n    msg.childpath = \"user/\" + msg.payload.userName\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -405,7 +413,7 @@
         "type": "function",
         "z": "f3313a5ac556a805",
         "name": "function 3",
-        "func": "if(msg.payload == null)\n{\n    msg.payload = flow.get(\"password\")\n    msg.childpath = flow.get(\"userName\") + \"/password\"\n    return msg;\n}",
+        "func": "if(msg.payload == null)\n{\n    msg.payload = flow.get(\"password\")\n    msg.childpath = \"user/\" + flow.get(\"userName\") + \"/password\"\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -525,7 +533,7 @@
         "type": "function",
         "z": "5bfa475fd1e7d02b",
         "name": "function 4",
-        "func": "flow.set(\"userName\",msg.payload.userName)\nflow.set(\"password\", msg.payload.password)\nmsg.childpath = msg.payload.userName\nreturn msg;",
+        "func": "flow.set(\"userName\",msg.payload.userName)\nflow.set(\"password\", msg.payload.password)\nmsg.childpath = \"user/\" + msg.payload.userName\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
