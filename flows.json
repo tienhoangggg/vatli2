@@ -83,7 +83,7 @@
         "name": "Home",
         "icon": "dashboard",
         "disabled": false,
-        "hidden": false
+        "hidden": true
     },
     {
         "id": "cf5d780e9690fd28",
@@ -113,7 +113,7 @@
         "name": "AddDevice",
         "icon": "dashboard",
         "disabled": false,
-        "hidden": false
+        "hidden": true
     },
     {
         "id": "c54f7acc2280f3a5",
@@ -132,7 +132,7 @@
         "name": "AddProcess",
         "icon": "dashboard",
         "disabled": false,
-        "hidden": false
+        "hidden": true
     },
     {
         "id": "8b36d0b198c719c9",
@@ -168,7 +168,7 @@
         "className": ""
     },
     {
-        "id": "c61d94800c52d929",
+        "id": "2fe941d7deb9a901",
         "type": "ui_base",
         "theme": {
             "name": "theme-light",
@@ -176,7 +176,8 @@
                 "default": "#0094CE",
                 "baseColor": "#0094CE",
                 "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": false
+                "edited": true,
+                "reset": false
             },
             "darkTheme": {
                 "default": "#097479",
@@ -264,6 +265,12 @@
         }
     },
     {
+        "id": "4b1608718531487c",
+        "type": "firebase config",
+        "firebaseurl": "vatli2-default-rtdb",
+        "loginType": "none"
+    },
+    {
         "id": "6267b232d241dd80",
         "type": "ui_form",
         "z": "f3313a5ac556a805",
@@ -308,10 +315,12 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 350,
+        "x": 330,
         "y": 200,
         "wires": [
-            []
+            [
+                "5ff01c619aca8741"
+            ]
         ]
     },
     {
@@ -350,6 +359,78 @@
         "events": "all",
         "x": 520,
         "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5ff01c619aca8741",
+        "type": "function",
+        "z": "f3313a5ac556a805",
+        "name": "function 2",
+        "func": "if (msg.payload.password == msg.payload.confirm_Password)\n{\n    flow.set(\"userName\",msg.payload.userName)\n    flow.set(\"password\", msg.payload.password)\n    msg.childpath = msg.payload.userName\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 200,
+        "wires": [
+            [
+                "bb51cf358338b065"
+            ]
+        ]
+    },
+    {
+        "id": "bb51cf358338b065",
+        "type": "firebase.once",
+        "z": "f3313a5ac556a805",
+        "name": "",
+        "firebaseconfig": "4b1608718531487c",
+        "childpath": "msg.childpath",
+        "repeatifnull": false,
+        "eventType": "value",
+        "queries": [],
+        "x": 740,
+        "y": 200,
+        "wires": [
+            [
+                "2da617e8541cb103"
+            ]
+        ]
+    },
+    {
+        "id": "2da617e8541cb103",
+        "type": "function",
+        "z": "f3313a5ac556a805",
+        "name": "function 3",
+        "func": "if(msg.payload == null)\n{\n    msg.payload = flow.get(\"password\")\n    msg.childpath = flow.get(\"userName\") + \"/password\"\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 200,
+        "wires": [
+            [
+                "bbc3aa3c1f077899"
+            ]
+        ]
+    },
+    {
+        "id": "bbc3aa3c1f077899",
+        "type": "firebase modify",
+        "z": "f3313a5ac556a805",
+        "name": "",
+        "firebaseconfig": "4b1608718531487c",
+        "childpath": "msg.childpath",
+        "method": "set",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 1320,
+        "y": 200,
         "wires": [
             []
         ]
@@ -394,7 +475,9 @@
         "x": 390,
         "y": 220,
         "wires": [
-            []
+            [
+                "877d6b34e7878407"
+            ]
         ]
     },
     {
@@ -438,6 +521,74 @@
         ]
     },
     {
+        "id": "877d6b34e7878407",
+        "type": "function",
+        "z": "5bfa475fd1e7d02b",
+        "name": "function 4",
+        "func": "flow.set(\"userName\",msg.payload.userName)\nflow.set(\"password\", msg.payload.password)\nmsg.childpath = msg.payload.userName\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 220,
+        "wires": [
+            [
+                "5720ca7afe2cd3c7"
+            ]
+        ]
+    },
+    {
+        "id": "5720ca7afe2cd3c7",
+        "type": "firebase.once",
+        "z": "5bfa475fd1e7d02b",
+        "name": "",
+        "firebaseconfig": "4b1608718531487c",
+        "childpath": "msg.childpath",
+        "repeatifnull": false,
+        "eventType": "value",
+        "queries": [],
+        "x": 800,
+        "y": 220,
+        "wires": [
+            [
+                "a8d001e74254251e"
+            ]
+        ]
+    },
+    {
+        "id": "a8d001e74254251e",
+        "type": "function",
+        "z": "5bfa475fd1e7d02b",
+        "name": "function 5",
+        "func": "if(msg.payload != null)\n{\n    if(msg.payload.password == flow.get(\"password\"))\n        msg.payload = { \"tab\": \"Home\" }\n    else\n        msg.payload = { \"tab\": \"Login\" }\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 220,
+        "wires": [
+            [
+                "2ff7a309a0b21c89"
+            ]
+        ]
+    },
+    {
+        "id": "2ff7a309a0b21c89",
+        "type": "ui_ui_control",
+        "z": "5bfa475fd1e7d02b",
+        "name": "",
+        "events": "all",
+        "x": 1220,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "cdbb44ba5b37245a",
         "type": "ui_button",
         "z": "a2fc58594af88863",
@@ -453,7 +604,7 @@
         "bgcolor": "",
         "className": "",
         "icon": "",
-        "payload": "{\"tab\":\"addDevice\"}",
+        "payload": "{\"tab\":\"AddDevice\"}",
         "payloadType": "json",
         "topic": "topic",
         "topicType": "msg",
