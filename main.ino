@@ -1,11 +1,12 @@
 #include <WiFi.h>
-#include <Servo.h>
+#include <ESP32Servo.h>
 #include <PubSubClient.h>
 int trig_pin = 2;
 int echo_pin = 4;
-int addDevice_pin = 0;
-int reset_pin = 0;
-int pin_servo = 9;
+int addDevice_pin = 5;
+int pin_servo = 18;
+int key = 0;
+int countTime = 0;
 const char *ssid = "Wokwi-GUEST";
 const char *password = "";
 const char *idDevice = "30t41975";
@@ -16,9 +17,9 @@ int port = 1883;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
+Servo myservo;
 
-void wifiConnect()
-{
+void wifiConnect() {
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED)
   {
@@ -26,19 +27,17 @@ void wifiConnect()
   }
 }
 
-void mqttReconnect()
-{
+void mqttReconnect() {
   while (!client.connected())
   {
-    if (client.connect(idDevice)))
-      {
-
-        //***Subscribe all topic you need***
-        client.subscribe("binhluuluong/");
-      }
+    if (client.connect(idDevice))
+    {
+      //***Subscribe all topic you need***
+      client.subscribe("binhluuluong_esp32_key");
+    }
     else
     {
-      delay(5000);
+      delay(2000);
     }
   }
 }
@@ -47,25 +46,56 @@ void setup()
 {
   pinMode(trig_pin, OUTPUT);
   pinMode(echo_pin, INPUT);
+  pinMode(addDevice_pin, INPUT);
   wifiConnect();
   client.setServer(mqttServer, port);
   client.setCallback(callback);
-
   myservo.attach(pin_servo);
+  Serial.begin(115200);
+}
+
+void addDevice(String strMsg) {
+  String strKey = "", strPass = "", strUser = "", strID = "";
+  while (key > 0)
+  {
+    strKey = (char)(key % 10 + 48) + strKey;
+    key /= 10;
+  }
+  int index2 = strMsg.length() - 1, index1 = 0;
+  while (strMsg[index1] != ' ')
+    index1++;
+  for (int i = 0; i < index1; i++)
+    strID += strMsg[i];
+  if (strID != idDevice) return;
+  while (strMsg[index2] != ' ')
+    index2--;
+  for (int i = index1 + 1; i < index2; i++)
+    strUser += strMsg[i];
+  for (int i = index2 + 1; i < strMsg.length(); i++)
+    strPass += strMsg[i];
+  if (strKey == strPass)
+    strPass = " T";
+  else
+    strPass = " F";
+  strMsg = strUser + " " + idDevice + strPass;
+  client.publish("binhluuluong_nodered_addDevice", strMsg.c_str());
 }
 
 // MQTT Receiver
-void callback(char *topic, byte *message, unsigned int length)
-{
+void callback(char *topic, byte *message, unsigned int length) {
   String strMsg;
   for (int i = 0; i < length; i++)
   {
     strMsg += (char)message[i];
   }
+  if (String(topic) == "binhluuluong_esp32_key")
+  {
+    addDevice(strMsg);
+    return;
+  }
 }
 
-long getDistance()
-{
+long getDistance() {
   digitalWrite(trig_pin, LOW);
   delayMicroseconds(2);
   digitalWrite(trig_pin, HIGH);
@@ -76,8 +106,7 @@ long getDistance()
   return distanceCm;
 }
 
-void turnServo(bool s)
-{
+void turnServo(bool s) {
   if (s == true)
   {
     myservo.write(180);
@@ -88,22 +117,22 @@ void turnServo(bool s)
   }
 }
 
-long volume(){
+long volume() {
   long h = 50 - getDistance();
   long v = 0;
   if (h > 20) {
-    v += (h-20)*1256;
+    v += (h - 20) * 1256;
     h = 20;
   }
   v += 25120 * h * h * h / 24000;
   return v;
 }
 
-void throwOut(long v){
+void throwOut(long v) {
   long v_after = volume() - v;
   if (v_after < 0) v_after = 0;
   turnServo(true);
-  while(volume() > v_after);
+  while (volume() > v_after);
   turnServo(false);
 }
 
@@ -112,6 +141,11 @@ void loop()
   if (!client.connected())
   {
     mqttReconnect();
+  }
+  if (digitalRead(addDevice_pin) == HIGH)
+  {
+    key = random();
+    Serial.println(key);
   }
   client.loop();
 }

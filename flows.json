@@ -279,6 +279,33 @@
         "loginType": "none"
     },
     {
+        "id": "5dfc3f24c79652d3",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.mqtt-dashboard.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
         "id": "6267b232d241dd80",
         "type": "ui_form",
         "z": "f3313a5ac556a805",
@@ -533,7 +560,7 @@
         "type": "function",
         "z": "5bfa475fd1e7d02b",
         "name": "function 4",
-        "func": "flow.set(\"userName\",msg.payload.userName)\nflow.set(\"password\", msg.payload.password)\nmsg.childpath = \"user/\" + msg.payload.userName\nreturn msg;",
+        "func": "global.set(\"userName\",msg.payload.userName)\nflow.set(\"password\", msg.payload.password)\nmsg.childpath = \"user/\" + msg.payload.userName\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -784,8 +811,103 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 350,
+        "x": 130,
         "y": 160,
+        "wires": [
+            [
+                "272d08c8f7c608bb"
+            ]
+        ]
+    },
+    {
+        "id": "272d08c8f7c608bb",
+        "type": "function",
+        "z": "85f36df497b9880d",
+        "name": "function 6",
+        "func": "msg.payload = msg.payload.idDevice+ \" \" + global.get(\"userName\") + \" \" + msg.payload.key\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 160,
+        "wires": [
+            [
+                "714816ea2e834a13"
+            ]
+        ]
+    },
+    {
+        "id": "714816ea2e834a13",
+        "type": "mqtt out",
+        "z": "85f36df497b9880d",
+        "name": "",
+        "topic": "binhluuluong_esp32_key",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5dfc3f24c79652d3",
+        "x": 410,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "0e14a56a4b0949c7",
+        "type": "mqtt in",
+        "z": "85f36df497b9880d",
+        "name": "",
+        "topic": "binhluuluong_nodered_addDevice",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "5dfc3f24c79652d3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 260,
+        "y": 220,
+        "wires": [
+            [
+                "e73eef50763660e2"
+            ]
+        ]
+    },
+    {
+        "id": "e73eef50763660e2",
+        "type": "function",
+        "z": "85f36df497b9880d",
+        "name": "function 7",
+        "func": "var l = msg.payload.split(\" \")\nif (l[2] == \"T\"){\n    msg.childpath = \"user/\"+l[0]+\"/idDevice/\"+l[1]\n    msg.payload = Date.now()\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 220,
+        "wires": [
+            [
+                "0a7ddabb665bd26a"
+            ]
+        ]
+    },
+    {
+        "id": "0a7ddabb665bd26a",
+        "type": "firebase modify",
+        "z": "85f36df497b9880d",
+        "name": "",
+        "firebaseconfig": "4b1608718531487c",
+        "childpath": "msg.childpath",
+        "method": "set",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 740,
+        "y": 220,
         "wires": [
             []
         ]
