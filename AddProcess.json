@@ -1,0 +1,186 @@
+[
+    {
+        "id": "1f8c1917e64d6e0e",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "43d47255c05cd7b4",
+        "type": "function",
+        "z": "1f8c1917e64d6e0e",
+        "name": "function 7",
+        "func": "flow.set(\"hour\", msg.payload.hour)\nflow.set(\"minute\", msg.payload.minute)\nflow.set(\"second\", msg.payload.second)\nflow.set(\"day\", msg.payload.day)\nflow.set(\"month\", msg.payload.month)\nflow.set(\"year\", msg.payload.year)\nmsg.childpath = \"Device/\" + msg.payload.idDevice\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 300,
+        "wires": [
+            [
+                "a90cc69a6e49ba03"
+            ]
+        ]
+    },
+    {
+        "id": "f5b328d0285b1cb1",
+        "type": "ui_form",
+        "z": "1f8c1917e64d6e0e",
+        "name": "",
+        "label": "",
+        "group": "0e6d738f8bfec35f",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "idDevice",
+                "value": "idDevice",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Hour",
+                "value": "hour",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Minute",
+                "value": "minute",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Second",
+                "value": "second",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Day",
+                "value": "day",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Month",
+                "value": "month",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Year",
+                "value": "year",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "idDevice": "",
+            "hour": "",
+            "minute": "",
+            "second": "",
+            "day": "",
+            "month": "",
+            "year": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 230,
+        "y": 300,
+        "wires": [
+            [
+                "43d47255c05cd7b4"
+            ]
+        ]
+    },
+    {
+        "id": "51bcd98b76cc3b35",
+        "type": "firebase modify",
+        "z": "1f8c1917e64d6e0e",
+        "name": "",
+        "firebaseconfig": "",
+        "childpath": "msg.childpath",
+        "method": "set",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 1250,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a90cc69a6e49ba03",
+        "type": "firebase.once",
+        "z": "1f8c1917e64d6e0e",
+        "name": "",
+        "firebaseconfig": "",
+        "childpath": "msg.childpath",
+        "repeatifnull": false,
+        "eventType": "value",
+        "queries": [],
+        "x": 640,
+        "y": 360,
+        "wires": [
+            [
+                "fad07746bda70b94"
+            ]
+        ]
+    },
+    {
+        "id": "fad07746bda70b94",
+        "type": "function",
+        "z": "1f8c1917e64d6e0e",
+        "name": "function 8",
+        "func": "if (msg.payload == null)\n{\n    // flow.ge(\"hour\", msg.payload.hour)\n    // flow.set(\"minute\", msg.payload.minute)\n    // flow.set(\"second\", msg.payload.second)\n    // flow.set(\"day\", msg.payload.day)\n    // flow.set(\"month\", msg.payload.month)\n    // flow.set(\"year\", msg.payload.year)\n    msg.childpath = \"Device/\" + msg.payload.idDevice\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 300,
+        "wires": [
+            [
+                "51bcd98b76cc3b35"
+            ]
+        ]
+    },
+    {
+        "id": "0e6d738f8bfec35f",
+        "type": "ui_group",
+        "name": "SetTime",
+        "tab": "a161bce6b6a73e98",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a161bce6b6a73e98",
+        "type": "ui_tab",
+        "name": "AddProcess",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
