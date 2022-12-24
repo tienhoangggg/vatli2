@@ -1,0 +1,194 @@
+[
+    {
+        "id": "f3313a5ac556a805",
+        "type": "tab",
+        "label": "Regester",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "6267b232d241dd80",
+        "type": "ui_form",
+        "z": "f3313a5ac556a805",
+        "name": "",
+        "label": "",
+        "group": "65b223978023b8f0",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "userName",
+                "value": "userName",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "password",
+                "value": "password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "confirm_Password",
+                "value": "confirm_Password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "userName": "",
+            "password": "",
+            "confirm_Password": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 330,
+        "y": 200,
+        "wires": [
+            [
+                "5ff01c619aca8741"
+            ]
+        ]
+    },
+    {
+        "id": "ef480e29841802c1",
+        "type": "ui_button",
+        "z": "f3313a5ac556a805",
+        "name": "",
+        "group": "65b223978023b8f0",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Login",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Login\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 330,
+        "y": 260,
+        "wires": [
+            [
+                "b0fbcf06ccc0de7c"
+            ]
+        ]
+    },
+    {
+        "id": "b0fbcf06ccc0de7c",
+        "type": "ui_ui_control",
+        "z": "f3313a5ac556a805",
+        "name": "",
+        "events": "all",
+        "x": 520,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5ff01c619aca8741",
+        "type": "function",
+        "z": "f3313a5ac556a805",
+        "name": "function 2",
+        "func": "if (msg.payload.password == msg.payload.confirm_Password)\n{\n    flow.set(\"userName\",msg.payload.userName)\n    flow.set(\"password\", msg.payload.password)\n    msg.childpath = \"user/\" + msg.payload.userName\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 200,
+        "wires": [
+            [
+                "bb51cf358338b065"
+            ]
+        ]
+    },
+    {
+        "id": "bb51cf358338b065",
+        "type": "firebase.once",
+        "z": "f3313a5ac556a805",
+        "name": "",
+        "firebaseconfig": "",
+        "childpath": "msg.childpath",
+        "repeatifnull": false,
+        "eventType": "value",
+        "queries": [],
+        "x": 740,
+        "y": 200,
+        "wires": [
+            [
+                "2da617e8541cb103"
+            ]
+        ]
+    },
+    {
+        "id": "2da617e8541cb103",
+        "type": "function",
+        "z": "f3313a5ac556a805",
+        "name": "function 3",
+        "func": "if(msg.payload == null)\n{\n    msg.payload = flow.get(\"password\")\n    msg.childpath = \"user/\" + flow.get(\"userName\") + \"/password\"\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1040,
+        "y": 200,
+        "wires": [
+            [
+                "bbc3aa3c1f077899"
+            ]
+        ]
+    },
+    {
+        "id": "bbc3aa3c1f077899",
+        "type": "firebase modify",
+        "z": "f3313a5ac556a805",
+        "name": "",
+        "firebaseconfig": "",
+        "childpath": "msg.childpath",
+        "method": "set",
+        "value": "msg.payload",
+        "priority": "msg.priority",
+        "x": 1320,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "65b223978023b8f0",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "0203342d6fc07dad",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "0203342d6fc07dad",
+        "type": "ui_tab",
+        "name": "Register",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]

@@ -1,0 +1,182 @@
+[
+    {
+        "id": "5bfa475fd1e7d02b",
+        "type": "tab",
+        "label": "Login",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4f4ce6ba438a9a0c",
+        "type": "ui_form",
+        "z": "5bfa475fd1e7d02b",
+        "name": "",
+        "label": "",
+        "group": "86126820837760eb",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "userName",
+                "value": "userName",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "password",
+                "value": "password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "userName": "",
+            "password": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 390,
+        "y": 220,
+        "wires": [
+            [
+                "877d6b34e7878407"
+            ]
+        ]
+    },
+    {
+        "id": "ba51a5ef8936aa16",
+        "type": "ui_button",
+        "z": "5bfa475fd1e7d02b",
+        "name": "",
+        "group": "86126820837760eb",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Register",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Register\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 400,
+        "y": 280,
+        "wires": [
+            [
+                "74fa568b80725afe"
+            ]
+        ]
+    },
+    {
+        "id": "74fa568b80725afe",
+        "type": "ui_ui_control",
+        "z": "5bfa475fd1e7d02b",
+        "name": "",
+        "events": "all",
+        "x": 640,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "877d6b34e7878407",
+        "type": "function",
+        "z": "5bfa475fd1e7d02b",
+        "name": "function 4",
+        "func": "global.set(\"userName\",msg.payload.userName)\nflow.set(\"password\", msg.payload.password)\nmsg.childpath = \"user/\" + msg.payload.userName\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 220,
+        "wires": [
+            [
+                "5720ca7afe2cd3c7"
+            ]
+        ]
+    },
+    {
+        "id": "5720ca7afe2cd3c7",
+        "type": "firebase.once",
+        "z": "5bfa475fd1e7d02b",
+        "name": "",
+        "firebaseconfig": "",
+        "childpath": "msg.childpath",
+        "repeatifnull": false,
+        "eventType": "value",
+        "queries": [],
+        "x": 800,
+        "y": 220,
+        "wires": [
+            [
+                "a8d001e74254251e"
+            ]
+        ]
+    },
+    {
+        "id": "a8d001e74254251e",
+        "type": "function",
+        "z": "5bfa475fd1e7d02b",
+        "name": "function 5",
+        "func": "if(msg.payload != null)\n{\n    if(msg.payload.password == flow.get(\"password\"))\n        msg.payload = { \"tab\": \"Home\" }\n    else\n        msg.payload = { \"tab\": \"Login\" }\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 220,
+        "wires": [
+            [
+                "2ff7a309a0b21c89"
+            ]
+        ]
+    },
+    {
+        "id": "2ff7a309a0b21c89",
+        "type": "ui_ui_control",
+        "z": "5bfa475fd1e7d02b",
+        "name": "",
+        "events": "all",
+        "x": 1220,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "86126820837760eb",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "641a6ccba11fbfd7",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "641a6ccba11fbfd7",
+        "type": "ui_tab",
+        "name": "Login",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
