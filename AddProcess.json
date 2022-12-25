@@ -1,35 +1,35 @@
 [
     {
-        "id": "1f8c1917e64d6e0e",
+        "id": "75dd9aae29cbd04b",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "AddProcess",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "43d47255c05cd7b4",
+        "id": "9bf7ce72127bf82a",
         "type": "function",
-        "z": "1f8c1917e64d6e0e",
+        "z": "75dd9aae29cbd04b",
         "name": "function 7",
-        "func": "flow.set(\"hour\", msg.payload.hour)\nflow.set(\"minute\", msg.payload.minute)\nflow.set(\"second\", msg.payload.second)\nflow.set(\"day\", msg.payload.day)\nflow.set(\"month\", msg.payload.month)\nflow.set(\"year\", msg.payload.year)\nmsg.childpath = \"Device/\" + msg.payload.idDevice\nreturn msg;",
+        "func": "flow.set(\"time\",new Date(msg.payload.year,msg.payload.month - 1,msg.payload.day,msg.payload.hour,msg.payload.minute,msg.payload.second).getTime())\nflow.set(\"ml\",msg.payload.ml)\nflow.set(\"id\",msg.payload.idDevice)\nmsg.childpath = \"user/\" + global.get(\"userName\") + \"/idDevice/\" + flow.get(\"id\")\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 340,
-        "y": 300,
+        "x": 260,
+        "y": 220,
         "wires": [
             [
-                "a90cc69a6e49ba03"
+                "6a89d61404968d7e"
             ]
         ]
     },
     {
-        "id": "f5b328d0285b1cb1",
+        "id": "3b220443392eb027",
         "type": "ui_form",
-        "z": "1f8c1917e64d6e0e",
+        "z": "75dd9aae29cbd04b",
         "name": "",
         "label": "",
         "group": "0e6d738f8bfec35f",
@@ -82,7 +82,14 @@
             {
                 "label": "Year",
                 "value": "year",
-                "type": "text",
+                "type": "number",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "ml",
+                "value": "ml",
+                "type": "number",
                 "required": true,
                 "rows": null
             }
@@ -94,7 +101,8 @@
             "second": "",
             "day": "",
             "month": "",
-            "year": ""
+            "year": "",
+            "ml": ""
         },
         "payload": "",
         "submit": "submit",
@@ -103,64 +111,139 @@
         "topicType": "msg",
         "splitLayout": "",
         "className": "",
-        "x": 230,
-        "y": 300,
+        "x": 150,
+        "y": 220,
         "wires": [
             [
-                "43d47255c05cd7b4"
+                "9bf7ce72127bf82a"
             ]
         ]
     },
     {
-        "id": "51bcd98b76cc3b35",
+        "id": "6f1384a12245d5e8",
         "type": "firebase modify",
-        "z": "1f8c1917e64d6e0e",
+        "z": "75dd9aae29cbd04b",
         "name": "",
         "firebaseconfig": "",
         "childpath": "msg.childpath",
         "method": "set",
         "value": "msg.payload",
         "priority": "msg.priority",
-        "x": 1250,
-        "y": 360,
+        "x": 1820,
+        "y": 200,
         "wires": [
             []
         ]
     },
     {
-        "id": "a90cc69a6e49ba03",
+        "id": "6a89d61404968d7e",
         "type": "firebase.once",
-        "z": "1f8c1917e64d6e0e",
+        "z": "75dd9aae29cbd04b",
         "name": "",
         "firebaseconfig": "",
         "childpath": "msg.childpath",
         "repeatifnull": false,
         "eventType": "value",
         "queries": [],
-        "x": 640,
-        "y": 360,
+        "x": 560,
+        "y": 220,
         "wires": [
             [
-                "fad07746bda70b94"
+                "17a46aad8114ddfb"
             ]
         ]
     },
     {
-        "id": "fad07746bda70b94",
+        "id": "17a46aad8114ddfb",
         "type": "function",
-        "z": "1f8c1917e64d6e0e",
+        "z": "75dd9aae29cbd04b",
         "name": "function 8",
-        "func": "if (msg.payload == null)\n{\n    // flow.ge(\"hour\", msg.payload.hour)\n    // flow.set(\"minute\", msg.payload.minute)\n    // flow.set(\"second\", msg.payload.second)\n    // flow.set(\"day\", msg.payload.day)\n    // flow.set(\"month\", msg.payload.month)\n    // flow.set(\"year\", msg.payload.year)\n    msg.childpath = \"Device/\" + msg.payload.idDevice\n}\nreturn msg;",
+        "func": "if (msg.payload != null)\n{\n    msg.childpath = \"Device/\" + flow.get(\"id\")\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 940,
+        "x": 860,
+        "y": 220,
+        "wires": [
+            [
+                "a27863fd04bcc762"
+            ]
+        ]
+    },
+    {
+        "id": "a27863fd04bcc762",
+        "type": "firebase.once",
+        "z": "75dd9aae29cbd04b",
+        "name": "",
+        "firebaseconfig": "",
+        "childpath": "msg.childpath",
+        "repeatifnull": false,
+        "eventType": "value",
+        "queries": [],
+        "x": 1160,
+        "y": 220,
+        "wires": [
+            [
+                "54d6a961a16e728f"
+            ]
+        ]
+    },
+    {
+        "id": "54d6a961a16e728f",
+        "type": "function",
+        "z": "75dd9aae29cbd04b",
+        "name": "function 9",
+        "func": "if (msg.payload != null)\n{\n    var index = 1;\n    var count = msg.payload.count;\n    while(index <= count)\n    {\n        if (flow.get(\"time\") < msg.payload[\"schedule\" + index].time)\n            index+=1\n        else\n            break\n    }\n    for(var i = count+1;i>index;i--)\n    {\n        msg.payload[\"schedule\" + i] = msg.payload[\"schedule\" + (i-1)]\n    }\n    msg.payload[\"schedule\"+index] = {\"time\":flow.get(\"time\"),\"ml\":flow.get(\"ml\")}\n    msg.payload.count = count + 1\n    msg.childpath = \"Device/\" + flow.get(\"id\")\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1460,
+        "y": 220,
+        "wires": [
+            [
+                "6f1384a12245d5e8",
+                "3c9de16025257ddd"
+            ]
+        ]
+    },
+    {
+        "id": "6810fb1f21573ef8",
+        "type": "mqtt out",
+        "z": "75dd9aae29cbd04b",
+        "name": "",
+        "topic": "binhluuluong_esp32_schedule",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5dfc3f24c79652d3",
+        "x": 1770,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "3c9de16025257ddd",
+        "type": "function",
+        "z": "75dd9aae29cbd04b",
+        "name": "function 10",
+        "func": "if (msg.payload != null) {\n    msg.payload = flow.get(\"id\") + \" \" + (flow.get(\"time\")/1000) + \" \" + flow.get(\"ml\")\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1530,
         "y": 300,
         "wires": [
             [
-                "51bcd98b76cc3b35"
+                "6810fb1f21573ef8"
             ]
         ]
     },
@@ -176,11 +259,38 @@
         "className": ""
     },
     {
+        "id": "5dfc3f24c79652d3",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.mqtt-dashboard.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
         "id": "a161bce6b6a73e98",
         "type": "ui_tab",
         "name": "AddProcess",
         "icon": "dashboard",
         "disabled": false,
-        "hidden": false
+        "hidden": true
     }
 ]
