@@ -3,6 +3,10 @@
 #include <PubSubClient.h>
 #include "time.h"
 #include <LiquidCrystal_I2C.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 int trig_pin = 19;
 int echo_pin = 18;
 int addDevice_pin = 5;
@@ -105,6 +109,7 @@ void mqttReconnect()
 			//***Subscribe all topic you need***
 			client.subscribe("binhluuluong_esp32_key");
 			client.subscribe("binhluuluong_esp32_schedule");
+			client.subscribe("binhluuluong_esp32_device");
 		}
 		else
 		{
@@ -191,6 +196,28 @@ void setSchedule(String strMsg)
 	char **e;
 	l.insert(strtol(time.c_str(), e, 10), strtol(ml.c_str(), e, 10));
 }
+void sendReserves(String strMsg)
+{
+	String strID = "";
+	int index = 0;
+	// stack<char> stringStack;
+	while (strMsg[index] != ' ')
+	{
+		strID += strMsg[index];
+		index++;
+	}
+
+	if (strID != idDevice)
+	{
+		return;
+	}
+	long reserves = volume();
+	char buffer[8];
+	itoa(reserves, buffer, 10);
+	client.publish("binhluuluong_nodered_reserves", buffer);
+	return;
+}
+
 // MQTT Receiver
 void callback(char *topic, byte *message, unsigned int length)
 {
@@ -207,6 +234,11 @@ void callback(char *topic, byte *message, unsigned int length)
 	if (String(topic) == "binhluuluong_esp32_schedule")
 	{
 		setSchedule(strMsg);
+		return;
+	}
+	if (String(topic) == "binhluuluong_esp32_device")
+	{
+		sendReserves(strMsg);
 		return;
 	}
 }
