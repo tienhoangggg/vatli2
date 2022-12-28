@@ -1,6 +1,6 @@
 [
     {
-        "id": "75dd9aae29cbd04b",
+        "id": "90023fc953a42b88",
         "type": "tab",
         "label": "AddProcess",
         "disabled": false,
@@ -8,9 +8,9 @@
         "env": []
     },
     {
-        "id": "9bf7ce72127bf82a",
+        "id": "1da8e2248dc206df",
         "type": "function",
-        "z": "75dd9aae29cbd04b",
+        "z": "90023fc953a42b88",
         "name": "function 7",
         "func": "flow.set(\"time\",new Date(msg.payload.year,msg.payload.month - 1,msg.payload.day,msg.payload.hour,msg.payload.minute,msg.payload.second).getTime())\nflow.set(\"ml\",msg.payload.ml)\nflow.set(\"id\",msg.payload.idDevice)\nmsg.childpath = \"user/\" + global.get(\"userName\") + \"/idDevice/\" + flow.get(\"id\")\nreturn msg;",
         "outputs": 1,
@@ -22,17 +22,17 @@
         "y": 220,
         "wires": [
             [
-                "6a89d61404968d7e"
+                "396e76fc922dac74"
             ]
         ]
     },
     {
-        "id": "3b220443392eb027",
+        "id": "831a0a98519e61ed",
         "type": "ui_form",
-        "z": "75dd9aae29cbd04b",
+        "z": "90023fc953a42b88",
         "name": "",
         "label": "",
-        "group": "0e6d738f8bfec35f",
+        "group": "b30d9afca9295298",
         "order": 8,
         "width": 0,
         "height": 0,
@@ -115,14 +115,14 @@
         "y": 220,
         "wires": [
             [
-                "9bf7ce72127bf82a"
+                "1da8e2248dc206df"
             ]
         ]
     },
     {
-        "id": "6f1384a12245d5e8",
+        "id": "1407e732244c5592",
         "type": "firebase modify",
-        "z": "75dd9aae29cbd04b",
+        "z": "90023fc953a42b88",
         "name": "",
         "firebaseconfig": "",
         "childpath": "msg.childpath",
@@ -136,9 +136,9 @@
         ]
     },
     {
-        "id": "6a89d61404968d7e",
+        "id": "396e76fc922dac74",
         "type": "firebase.once",
-        "z": "75dd9aae29cbd04b",
+        "z": "90023fc953a42b88",
         "name": "",
         "firebaseconfig": "",
         "childpath": "msg.childpath",
@@ -149,14 +149,14 @@
         "y": 220,
         "wires": [
             [
-                "17a46aad8114ddfb"
+                "9c06818fac842f2f"
             ]
         ]
     },
     {
-        "id": "17a46aad8114ddfb",
+        "id": "9c06818fac842f2f",
         "type": "function",
-        "z": "75dd9aae29cbd04b",
+        "z": "90023fc953a42b88",
         "name": "function 8",
         "func": "if (msg.payload != null)\n{\n    msg.childpath = \"Device/\" + flow.get(\"id\")\n}\nreturn msg;",
         "outputs": 1,
@@ -168,14 +168,14 @@
         "y": 220,
         "wires": [
             [
-                "a27863fd04bcc762"
+                "5362a79f13c4fcbf"
             ]
         ]
     },
     {
-        "id": "a27863fd04bcc762",
+        "id": "5362a79f13c4fcbf",
         "type": "firebase.once",
-        "z": "75dd9aae29cbd04b",
+        "z": "90023fc953a42b88",
         "name": "",
         "firebaseconfig": "",
         "childpath": "msg.childpath",
@@ -186,14 +186,14 @@
         "y": 220,
         "wires": [
             [
-                "54d6a961a16e728f"
+                "e14063981957d1a0"
             ]
         ]
     },
     {
-        "id": "54d6a961a16e728f",
+        "id": "e14063981957d1a0",
         "type": "function",
-        "z": "75dd9aae29cbd04b",
+        "z": "90023fc953a42b88",
         "name": "function 9",
         "func": "if (msg.payload != null)\n{\n    var index = 1;\n    var count = msg.payload.count;\n    while(index <= count)\n    {\n        if (flow.get(\"time\") < msg.payload[\"schedule\" + index].time)\n            index+=1\n        else\n            break\n    }\n    for(var i = count+1;i>index;i--)\n    {\n        msg.payload[\"schedule\" + i] = msg.payload[\"schedule\" + (i-1)]\n    }\n    msg.payload[\"schedule\"+index] = {\"time\":flow.get(\"time\"),\"ml\":flow.get(\"ml\")}\n    msg.payload.count = count + 1\n    msg.childpath = \"Device/\" + flow.get(\"id\")\n    return msg;\n}",
         "outputs": 1,
@@ -205,15 +205,15 @@
         "y": 220,
         "wires": [
             [
-                "6f1384a12245d5e8",
-                "3c9de16025257ddd"
+                "1407e732244c5592",
+                "fb4635b586fc3384"
             ]
         ]
     },
     {
-        "id": "6810fb1f21573ef8",
+        "id": "925812c5ab096643",
         "type": "mqtt out",
-        "z": "75dd9aae29cbd04b",
+        "z": "90023fc953a42b88",
         "name": "",
         "topic": "binhluuluong_esp32_schedule",
         "qos": "2",
@@ -229,9 +229,9 @@
         "wires": []
     },
     {
-        "id": "3c9de16025257ddd",
+        "id": "fb4635b586fc3384",
         "type": "function",
-        "z": "75dd9aae29cbd04b",
+        "z": "90023fc953a42b88",
         "name": "function 10",
         "func": "if (msg.payload != null) {\n    msg.payload = flow.get(\"id\") + \" \" + (flow.get(\"time\")/1000) + \" \" + flow.get(\"ml\")\n    return msg;\n}",
         "outputs": 1,
@@ -243,15 +243,55 @@
         "y": 300,
         "wires": [
             [
-                "6810fb1f21573ef8"
+                "925812c5ab096643"
             ]
         ]
     },
     {
-        "id": "0e6d738f8bfec35f",
+        "id": "a22086b4ac1af6ef",
+        "type": "ui_button",
+        "z": "90023fc953a42b88",
+        "name": "",
+        "group": "b30d9afca9295298",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "back",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Home\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 190,
+        "y": 380,
+        "wires": [
+            [
+                "af7e6dd56b7c7157"
+            ]
+        ]
+    },
+    {
+        "id": "af7e6dd56b7c7157",
+        "type": "ui_ui_control",
+        "z": "90023fc953a42b88",
+        "name": "",
+        "events": "all",
+        "x": 360,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b30d9afca9295298",
         "type": "ui_group",
         "name": "SetTime",
-        "tab": "a161bce6b6a73e98",
+        "tab": "5ab1f8fd495b2cc7",
         "order": 2,
         "disp": true,
         "width": "6",
@@ -286,7 +326,7 @@
         "sessionExpiry": ""
     },
     {
-        "id": "a161bce6b6a73e98",
+        "id": "5ab1f8fd495b2cc7",
         "type": "ui_tab",
         "name": "AddProcess",
         "icon": "dashboard",

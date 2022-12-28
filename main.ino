@@ -138,6 +138,7 @@ void setup()
 	lcd.print(idDevice);
 	myservo.write(90);
 	Serial.begin(115200);
+	Serial.println("");
 }
 
 void addDevice(String strMsg)
@@ -198,23 +199,13 @@ void setSchedule(String strMsg)
 }
 void sendReserves(String strMsg)
 {
-	String strID = "";
-	int index = 0;
-	// stack<char> stringStack;
-	while (strMsg[index] != ' ')
-	{
-		strID += strMsg[index];
-		index++;
-	}
-
-	if (strID != idDevice)
+	if (strMsg != idDevice)
 	{
 		return;
 	}
-	long reserves = volume();
-	char buffer[8];
-	itoa(reserves, buffer, 10);
-	client.publish("binhluuluong_nodered_reserves", buffer);
+	strMsg += " ";
+	strMsg += std::to_string(state_v).c_str();
+	client.publish("binhluuluong_nodered_reserves", strMsg.c_str());
 	return;
 }
 
@@ -282,6 +273,7 @@ long volume()
 
 void throwOut(int v)
 {
+	Serial.println("");
 	int v_after = volume() - v;
 	if (v_after < 0)
 		v_after = 0;
@@ -313,7 +305,7 @@ void check_button()
 	if (state == true)
 	{
 		long v = volume();
-		if (state_v < v - 1256 || state_v > v + 1256 || state_be != state)
+		if (state_v < v - 1256 || state_v > v || state_be != state)
 		{
 			state_v = v;
 			lcd.setCursor(0, 1);
@@ -322,6 +314,8 @@ void check_button()
 			lcd.print(v);
 			lcd.setCursor(8, 1);
 			lcd.print("ml");
+			if (state_v < 300)
+				sendReserves(idDevice);
 		}
 	}
 	else if (state_be != state)

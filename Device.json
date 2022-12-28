@@ -49,58 +49,17 @@
         "type": "function",
         "z": "a16bd32488f57d08",
         "name": "function 16",
-        "func": "msg.payload = JSON.stringify(msg.payload);\n\n\nreturn msg;",
+        "func": "var str = \"\"\nfor(var i = 1; i < msg.payload.count;i++){\n    str += \"---------------schedule \" + i+'-------------<br>'\n    str += msg.payload[\"schedule\" + i].ml + \" ml<br>\"\n    str += new Date(msg.payload[\"schedule\" + i].time)+\"<br><br><br>\"\n}\nmsg.payload = str\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1450,
+        "x": 1510,
         "y": 260,
         "wires": [
             [
                 "263f16903a2ec6f5"
-            ]
-        ]
-    },
-    {
-        "id": "263f16903a2ec6f5",
-        "type": "ui_template",
-        "z": "a16bd32488f57d08",
-        "group": "6bf302b0b3993bd3",
-        "name": "",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "format": "<!-- <style>\n.main\n{\n    height: 600px;\n    width: 200px;\n    background: lightblue;\n\n}\n</stype> -->\n<div class = \"main \"ng-bind-html=\"msg.payload\"></div>",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 1620,
-        "y": 260,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "01b7594a732ff4a6",
-        "type": "function",
-        "z": "a16bd32488f57d08",
-        "name": "function 17",
-        "func": "var idDevice = global.get(\"idDevice\")\nmsg.payload = idDevice + ' '\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 730,
-        "y": 520,
-        "wires": [
-            [
-                "18a91c8332728e84",
-                "306380f5be59bc57"
             ]
         ]
     },
@@ -117,8 +76,8 @@
         "userProps": "",
         "correl": "",
         "expiry": "",
-        "broker": "24d57ea44b754e61",
-        "x": 980,
+        "broker": "5dfc3f24c79652d3",
+        "x": 820,
         "y": 520,
         "wires": []
     },
@@ -130,7 +89,7 @@
         "topic": "binhluuluong_nodered_reserves",
         "qos": "2",
         "datatype": "auto-detect",
-        "broker": "24d57ea44b754e61",
+        "broker": "5dfc3f24c79652d3",
         "nl": false,
         "rap": true,
         "rh": 0,
@@ -139,8 +98,7 @@
         "y": 580,
         "wires": [
             [
-                "4dccd1a6a7086be6",
-                "2118c67f5fcb2cd6"
+                "4dccd1a6a7086be6"
             ]
         ]
     },
@@ -149,7 +107,7 @@
         "type": "function",
         "z": "a16bd32488f57d08",
         "name": "function 18",
-        "func": "\nreturn msg;",
+        "func": "var mess = msg.payload.split(' ')\nif (mess[0] == global.get(\"idDevice\"))\n{\n    msg.payload = mess[1]\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -159,59 +117,10 @@
         "y": 580,
         "wires": [
             [
-                "9f11511e1371698e",
-                "d34a1a0c242b196c"
+                "d34a1a0c242b196c",
+                "88ab9c46c8cd1b13"
             ]
         ]
-    },
-    {
-        "id": "9f11511e1371698e",
-        "type": "debug",
-        "z": "a16bd32488f57d08",
-        "name": "debug 7",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1280,
-        "y": 640,
-        "wires": []
-    },
-    {
-        "id": "306380f5be59bc57",
-        "type": "debug",
-        "z": "a16bd32488f57d08",
-        "name": "debug 8",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 920,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "2118c67f5fcb2cd6",
-        "type": "debug",
-        "z": "a16bd32488f57d08",
-        "name": "debug 9",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1040,
-        "y": 640,
-        "wires": []
     },
     {
         "id": "6c9191f0cd6b0e5d",
@@ -229,15 +138,15 @@
         "bgcolor": "",
         "className": "",
         "icon": "",
-        "payload": "",
-        "payloadType": "str",
+        "payload": "idDevice",
+        "payloadType": "global",
         "topic": "topic",
         "topicType": "msg",
         "x": 560,
         "y": 520,
         "wires": [
             [
-                "01b7594a732ff4a6"
+                "18a91c8332728e84"
             ]
         ]
     },
@@ -255,7 +164,7 @@
         "label": "ml",
         "format": "{{value}}",
         "min": "0",
-        "max": "4500",
+        "max": "45000",
         "colors": [
             "#00b500",
             "#e6e600",
@@ -274,7 +183,7 @@
         "z": "a16bd32488f57d08",
         "name": "",
         "group": "6bf302b0b3993bd3",
-        "order": 3,
+        "order": 1,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -297,128 +206,105 @@
         ]
     },
     {
-        "id": "3bd6fbd8751f32f8",
-        "type": "ui_form",
+        "id": "c0193863cde21eac",
+        "type": "ui_button",
         "z": "a16bd32488f57d08",
         "name": "",
-        "label": "",
-        "group": "6bf302b0b3993bd3",
-        "order": 3,
+        "group": "33d50ddb6bcec63c",
+        "order": 1,
         "width": 0,
         "height": 0,
-        "options": [
-            {
-                "label": "Schedule",
-                "value": "schedule",
-                "type": "text",
-                "required": true,
-                "rows": null
-            }
-        ],
-        "formValue": {
-            "schedule": ""
-        },
-        "payload": "",
-        "submit": "Delete Schedule",
-        "cancel": "",
+        "passthru": false,
+        "label": "back",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Home\"}",
+        "payloadType": "json",
         "topic": "topic",
         "topicType": "msg",
-        "splitLayout": "",
-        "className": "",
-        "x": 510,
-        "y": 700,
+        "x": 776.25,
+        "y": 387.5,
         "wires": [
             [
-                "bd311750e553802d"
+                "8fbde5b7d3c1f8c2"
             ]
         ]
     },
     {
-        "id": "bd311750e553802d",
+        "id": "8fbde5b7d3c1f8c2",
+        "type": "ui_ui_control",
+        "z": "a16bd32488f57d08",
+        "name": "",
+        "events": "all",
+        "x": 956.25,
+        "y": 387.5,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "263f16903a2ec6f5",
+        "type": "ui_template",
+        "z": "a16bd32488f57d08",
+        "group": "6bf302b0b3993bd3",
+        "name": "",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "format": "<!-- <style>\n.main\n{\n    height: 600px;\n    width: 200px;\n    background: lightblue;\n\n}\n</stype> -->\n<div class = \"main \"ng-bind-html=\"msg.payload\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 1700,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "36cb424660212db2",
+        "type": "http request",
+        "z": "a16bd32488f57d08",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "https://maker.ifttt.com/trigger/WARNING/with/key/diSGpPWAaLrt7Hd29MJVS0bNKBi7yq_S2IkOKDrIv_D",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1510,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "88ab9c46c8cd1b13",
         "type": "function",
         "z": "a16bd32488f57d08",
         "name": "function 19",
-        "func": "var idDevice = global.get(\"idDevice\")\nmsg.childpath = \"Device/\" + idDevice +'/' + msg.payload.schedule\nreturn msg;",
+        "func": "if (msg.payload != null) {\n    if (msg.payload < 300) {\n        msg.payload = { \"value1\": global.get(\"idDevice\") }\n        return msg;\n    }\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 670,
-        "y": 700,
+        "x": 1330,
+        "y": 640,
         "wires": [
             [
-                "eb2bb07ff8cc1080"
+                "36cb424660212db2"
             ]
-        ]
-    },
-    {
-        "id": "64b3e5c995fdf2ed",
-        "type": "debug",
-        "z": "a16bd32488f57d08",
-        "name": "debug 10",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1500,
-        "y": 620,
-        "wires": []
-    },
-    {
-        "id": "eb2bb07ff8cc1080",
-        "type": "firebase.once",
-        "z": "a16bd32488f57d08",
-        "name": "",
-        "firebaseconfig": "",
-        "childpath": "msg.childpath",
-        "repeatifnull": false,
-        "eventType": "value",
-        "queries": [],
-        "x": 1000,
-        "y": 700,
-        "wires": [
-            [
-                "22892d2c3b25b57c"
-            ]
-        ]
-    },
-    {
-        "id": "22892d2c3b25b57c",
-        "type": "function",
-        "z": "a16bd32488f57d08",
-        "name": "function 20",
-        "func": "var idDevice = global.get(\"idDevice\")\nif(msg.payload!=null)\n{\n    msg.childpath = \"Device/\" + idDevice + '/' + msg.payload.schedule\n    return msg;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1410,
-        "y": 700,
-        "wires": [
-            [
-                "0c2165c06c8f4a46"
-            ]
-        ]
-    },
-    {
-        "id": "0c2165c06c8f4a46",
-        "type": "firebase modify",
-        "z": "a16bd32488f57d08",
-        "name": "",
-        "firebaseconfig": "",
-        "childpath": "msg.childpath",
-        "method": "remove",
-        "value": "msg.payload",
-        "priority": "msg.priority",
-        "x": 1750,
-        "y": 700,
-        "wires": [
-            []
         ]
     },
     {
@@ -432,18 +318,7 @@
         "height": 1
     },
     {
-        "id": "6bf302b0b3993bd3",
-        "type": "ui_group",
-        "name": "Schedule",
-        "tab": "7c31e69f30dbadaa",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "24d57ea44b754e61",
+        "id": "5dfc3f24c79652d3",
         "type": "mqtt-broker",
         "name": "",
         "broker": "broker.mqtt-dashboard.com",
@@ -474,6 +349,28 @@
         "type": "ui_group",
         "name": "Reserves",
         "tab": "7c31e69f30dbadaa",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "6bf302b0b3993bd3",
+        "type": "ui_group",
+        "name": "Schedule",
+        "tab": "7c31e69f30dbadaa",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "33d50ddb6bcec63c",
+        "type": "ui_group",
+        "name": "back to Home",
+        "tab": "7c31e69f30dbadaa",
         "order": 1,
         "disp": true,
         "width": "6",
@@ -486,6 +383,6 @@
         "name": "Device",
         "icon": "dashboard",
         "disabled": false,
-        "hidden": false
+        "hidden": true
     }
 ]

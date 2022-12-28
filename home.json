@@ -102,8 +102,7 @@
         "y": 480,
         "wires": [
             [
-                "4d05fa5ef56bdd14",
-                "453f96c125391fdd"
+                "4d05fa5ef56bdd14"
             ]
         ]
     },
@@ -141,8 +140,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 1080,
-        "y": 600,
+        "x": 1460,
+        "y": 480,
         "wires": [
             []
         ]
@@ -153,7 +152,7 @@
         "z": "642da8d40e521942",
         "name": "",
         "group": "12dc0117bf8444cd",
-        "order": 1,
+        "order": 2,
         "width": 0,
         "height": 0,
         "passthru": false,
@@ -185,7 +184,7 @@
         "atStart": true,
         "eventType": "value",
         "queries": [],
-        "x": 930,
+        "x": 970,
         "y": 480,
         "wires": [
             [
@@ -299,38 +298,6 @@
         ]
     },
     {
-        "id": "453f96c125391fdd",
-        "type": "debug",
-        "z": "642da8d40e521942",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 740,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "47ec3b0a542a1148",
-        "type": "debug",
-        "z": "642da8d40e521942",
-        "name": "debug 5",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1280,
-        "y": 620,
-        "wires": []
-    },
-    {
         "id": "cf5d780e9690fd28",
         "type": "ui_group",
         "name": "Default",
@@ -369,6 +336,6 @@
         "name": "Home",
         "icon": "dashboard",
         "disabled": false,
-        "hidden": false
+        "hidden": true
     }
 ]
